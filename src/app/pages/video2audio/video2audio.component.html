@@ -34,7 +34,7 @@
         {{file.path | textFormat}}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <video width="100%" height="300" controls muted #video>
+    <video width="100%" height="300" controls #video>
         <source [src]="file.path" type="{{file.type}}">
     </video>
     <span>{{file.size | MB}}</span>
