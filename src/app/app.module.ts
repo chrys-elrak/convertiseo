@@ -17,11 +17,15 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppRoutingModule } from './app-routing.module';
 import { AboutComponent } from './pages/about/about.component';
 import { Video2audioComponent } from './pages/video2audio/video2audio.component';
 import { convertSizePipe, TextFormatPipe } from './pipes/text-format.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,11 @@ import { convertSizePipe, TextFormatPipe } from './pipes/text-format.pipe';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,

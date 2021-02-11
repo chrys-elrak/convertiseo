@@ -12,6 +12,9 @@ export class Video2audioComponent implements OnInit {
   files: any[] = [];
   append: boolean;
   types = ['mp3', 'ogg', 'aac', 'wav'];
+  selectedType: string;
+  loading: boolean;
+  sub;
   constructor() { }
 
   ngOnInit(): void {
@@ -27,7 +30,7 @@ export class Video2audioComponent implements OnInit {
     const f: any[] = Array.from(event.target.files);
     if (f.length > 0) {
       if (this.append) {
-        this.files = [...this.files,f];
+        this.files = [...this.files, ...f];
         return;
       }
       this.files = f;
@@ -36,6 +39,14 @@ export class Video2audioComponent implements OnInit {
 
   menuClick(event) {
     event.stopPropagation();
+  }
+
+  convert() {
+    this.loading = true;
+    this.sub = setTimeout(() => {
+      this.loading = false;
+      clearTimeout(this.sub);
+    }, 5000);
   }
 
   removeFile(idx: number) {

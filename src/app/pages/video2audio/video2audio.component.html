@@ -2,17 +2,17 @@
 <input type="file" style="display: none;" (change)="fileInputChange($event)" multiple accept="video/*" #fileInput>
 <mat-form-field>
   <mat-label>Types</mat-label>
-  <mat-select [disabled]="!files.length">
+  <mat-select [disabled]="!files.length" [(ngModel)]="selectedType">
     <mat-option *ngFor="let type of types" [value]="type">
       audio/{{type}}
     </mat-option>
   </mat-select>
 </mat-form-field>
 <button mat-button [disabled]="!files.length" (click)="buttonClick(true)">Append file(s)</button>
-<button [disabled]="!files.length" mat-raised-button color="primary">Convert</button>
-
+<button [disabled]="!files.length || !selectedType" mat-raised-button color="primary" (click)="convert()">Convert</button>
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
 <mat-accordion>
-  <mat-expansion-panel *ngFor="let file of files; let idx = index" (click)="pauseVideo(video)" style="margin-top: 5px;">
+  <mat-expansion-panel *ngFor="let file of files; let idx = index" (click)="pauseVideo(video)" style="margin-top: 5px;" [disabled]="loading">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <button  (click)="menuClick($event)" mat-icon-button [matMenuTriggerFor]="menu">
