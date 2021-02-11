@@ -1,0 +1,42 @@
+<button mat-button (click)="buttonClick()">Choose file(s)</button>
+<input type="file" style="display: none;" (change)="fileInputChange($event)" multiple accept="video/*" #fileInput>
+<mat-form-field>
+  <mat-label>Types</mat-label>
+  <mat-select [disabled]="!files.length">
+    <mat-option *ngFor="let type of types" [value]="type">
+      audio/{{type}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-button [disabled]="!files.length" (click)="buttonClick(true)">Append file(s)</button>
+<button [disabled]="!files.length" mat-raised-button color="primary">Convert</button>
+
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let file of files; let idx = index" (click)="pauseVideo(video)" style="margin-top: 5px;">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <button  (click)="menuClick($event)" mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        {{file.name}}
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="removeFile(idx)">
+            <mat-icon>delete</mat-icon>
+            <span>Remove</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>sync</mat-icon>
+            <span>Convert</span>
+          </button>
+        </mat-menu>
+      </mat-panel-title>
+      <mat-panel-description>
+        {{file.path | textFormat}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <video width="100%" height="300" controls muted #video>
+        <source [src]="file.path" type="{{file.type}}">
+    </video>
+    <span>{{file.size | MB}}</span>
+  </mat-expansion-panel>
+  </mat-accordion>

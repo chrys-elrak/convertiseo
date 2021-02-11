@@ -6,8 +6,6 @@ function createWindow(title = 'Convertiseo', resizable = false) {
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        maxWidth: 800,
-        maxHeight: 600,
         backgroundColor: '#eee',
         icon: `${BASENAME}/assets/icon.png`,
         title: title,
